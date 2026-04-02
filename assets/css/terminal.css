@@ -4,6 +4,9 @@
  * Core terminal styles. All colors reference CSS custom properties defined
  * in modes.css — no hardcoded color values in this file.
  *
+ * @font-face declarations are at the top so the font is defined before
+ * any rule that references var(--terminal-font).
+ *
  * Structure:
  *   1. Global variables and reset
  *   2. Base typography
@@ -24,6 +27,30 @@
  *  17. Focus indicators
  *  18. Utility
  */
+
+/* ── 0. Font face ────────────────────────────────────────────────────────── */
+
+/*
+ * JetBrains Mono is self-hosted — no CDN. Font files live in assets/fonts/.
+ * font-display: swap uses the fallback font while the custom font loads,
+ * then swaps it in — prevents invisible text during load.
+ */
+
+@font-face {
+	font-family: "JetBrains Mono";
+	src:         url( "../fonts/webfonts/JetBrainsMono-Regular.woff2" ) format( "woff2" );
+	font-weight: 400;
+	font-style:  normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "JetBrains Mono";
+	src:         url( "../fonts/webfonts/JetBrainsMono-Bold.woff2" ) format( "woff2" );
+	font-weight: 700;
+	font-style:  normal;
+	font-display: swap;
+}
 
 /* ── 1. Global variables and reset ──────────────────────────────────────── */
 

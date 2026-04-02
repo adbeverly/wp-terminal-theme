@@ -80,3 +80,4 @@ This theme bundles the following third-party resources:
 JetBrains Mono, Copyright 2020 The JetBrains Mono Project Authors
 License: SIL Open Font License, Version 1.1
 Source: https://www.jetbrains.com/lp/mono/
+Location: assets/fonts/webfonts/
