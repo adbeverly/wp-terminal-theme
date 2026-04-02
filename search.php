@@ -33,7 +33,10 @@ get_header();
 	<?php if ( have_posts() ) : ?>
 
 		<div class="post-list">
-			<?php while ( have_posts() ) : the_post(); ?>
+			<?php
+			while ( have_posts() ) :
+				the_post();
+				?>
 
 				<article id="post-<?php the_ID(); ?>" <?php post_class( 'post-list__item' ); ?>>
 					<span class="post-list__date">

@@ -51,8 +51,8 @@ if ( post_password_required() ) {
 		<?php
 		$terminal_pings = wp_list_comments(
 			array(
-				'type'    => 'pings',
-				'echo'    => false,
+				'type' => 'pings',
+				'echo' => false,
 			)
 		);
 
@@ -78,11 +78,11 @@ if ( post_password_required() ) {
 			<?php
 			wp_list_comments(
 				array(
-					'type'        => 'comment',
-					'style'       => 'ol',
-					'short_ping'  => true,
-					'avatar_size' => 0,
-					'callback'    => 'terminal_theme_comment',
+					'type'         => 'comment',
+					'style'        => 'ol',
+					'short_ping'   => true,
+					'avatar_size'  => 0,
+					'callback'     => 'terminal_theme_comment',
 					'end-callback' => 'terminal_theme_comment_end',
 				)
 			);
@@ -91,7 +91,7 @@ if ( post_password_required() ) {
 
 		<?php the_comments_pagination(); ?>
 
-	<?php endif; // have_comments() ?>
+	<?php endif; // End have_comments() check. ?>
 
 	<?php /* ── Comment form ──────────────────────────────────────────── */ ?>
 	<?php if ( comments_open() ) : ?>
@@ -99,12 +99,13 @@ if ( post_password_required() ) {
 		<?php
 		comment_form(
 			array(
-				'title_reply'          => esc_html__( '// leave a comment', 'terminal-theme' ),
-				'title_reply_to'       => esc_html__( '// reply to %s', 'terminal-theme' ),
-				'cancel_reply_link'    => esc_html__( 'cancel', 'terminal-theme' ),
-				'label_submit'         => esc_html__( 'submit', 'terminal-theme' ),
-				'class_submit'         => 'search-submit',
-				'comment_field'        =>
+				'title_reply'       => esc_html__( '// leave a comment', 'terminal-theme' ),
+				/* translators: %s: name of the person being replied to */
+				'title_reply_to'    => esc_html__( '// reply to %s', 'terminal-theme' ),
+				'cancel_reply_link' => esc_html__( 'cancel', 'terminal-theme' ),
+				'label_submit'      => esc_html__( 'submit', 'terminal-theme' ),
+				'class_submit'      => 'search-submit',
+				'comment_field'     =>
 					'<p class="comment-form-comment">' .
 					'<label for="comment">' . esc_html__( 'comment', 'terminal-theme' ) . '</label>' .
 					'<textarea id="comment" name="comment" class="search-field" cols="45" rows="6" required></textarea>' .
@@ -179,10 +180,10 @@ function terminal_theme_comment( $comment, $args, $depth ) {
 					array_merge(
 						$args,
 						array(
-							'depth'     => $depth,
-							'max_depth' => $args['max_depth'],
-							'before'    => '',
-							'after'     => '',
+							'depth'      => $depth,
+							'max_depth'  => $args['max_depth'],
+							'before'     => '',
+							'after'      => '',
 							'reply_text' => esc_html__( '// reply', 'terminal-theme' ),
 						)
 					)
@@ -197,10 +198,10 @@ function terminal_theme_comment( $comment, $args, $depth ) {
 /**
  * End callback for wp_list_comments() — closes the comment tag.
  *
- * @param string $args  wp_list_comments() arguments.
- * @param int    $depth Nesting depth of this comment.
+ * @param string $args   wp_list_comments() arguments.
+ * @param int    $_depth Nesting depth of this comment (required by callback signature, unused).
  */
-function terminal_theme_comment_end( $args, $depth ) {
+function terminal_theme_comment_end( $args, $_depth ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed
 	$tag = ( 'div' === $args['style'] ) ? 'div' : 'li';
 	echo '</' . esc_html( $tag ) . '>';
 }

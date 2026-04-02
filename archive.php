@@ -29,8 +29,10 @@ get_header();
 				/* translators: %s: author name */
 				printf( esc_html__( 'ls author/%s', 'terminal-theme' ), get_the_author() );
 			} elseif ( is_year() ) {
+				/* translators: %s: year, e.g. 2024 */
 				printf( esc_html__( 'ls posts/%s', 'terminal-theme' ), get_the_date( 'Y' ) );
 			} elseif ( is_month() ) {
+				/* translators: %s: year/month, e.g. 2024/01 */
 				printf( esc_html__( 'ls posts/%s', 'terminal-theme' ), get_the_date( 'Y/m' ) );
 			} else {
 				esc_html_e( 'ls posts/', 'terminal-theme' );
@@ -43,7 +45,10 @@ get_header();
 	<?php if ( have_posts() ) : ?>
 
 		<div class="post-list">
-			<?php while ( have_posts() ) : the_post(); ?>
+			<?php
+			while ( have_posts() ) :
+				the_post();
+				?>
 
 				<article id="post-<?php the_ID(); ?>" <?php post_class( 'post-list__item' ); ?>>
 					<span class="post-list__date">

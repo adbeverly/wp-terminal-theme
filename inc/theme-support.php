@@ -15,7 +15,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Register theme features and navigation menus.
  */
 function terminal_theme_setup() {
-
 	/*
 	 * Let WordPress manage the document title.
 	 * Without this, the theme would need to hardcode <title> in header.php.
@@ -100,7 +99,13 @@ add_action( 'widgets_init', 'terminal_theme_register_sidebars' );
  * Builds a hierarchical nested menu from the page tree.
  */
 function terminal_theme_nav_fallback() {
-	$all_pages = get_pages( array( 'sort_column' => 'menu_order', 'hierarchical' => false, 'number' => 8 ) );
+	$all_pages = get_pages(
+		array(
+			'sort_column'  => 'menu_order',
+			'hierarchical' => false,
+			'number'       => 8,
+		)
+	);
 
 	if ( ! $all_pages ) {
 		return;
@@ -130,13 +135,13 @@ function terminal_theme_nav_fallback_level( $by_parent, $parent_id ) {
 
 	foreach ( $by_parent[ $parent_id ] as $page ) {
 		$has_children = ! empty( $by_parent[ $page->ID ] );
-		$current      = ( get_queried_object_id() === $page->ID ) ? ' aria-current="page"' : '';
+		$is_current   = ( get_queried_object_id() === $page->ID );
 
 		echo $has_children ? '<li class="has-children">' : '<li>';
 		printf(
 			'<a href="%s"%s>%s</a>',
 			esc_url( get_permalink( $page->ID ) ),
-			$current,
+			$is_current ? ' aria-current="page"' : '',
 			esc_html( $page->post_title )
 		);
 

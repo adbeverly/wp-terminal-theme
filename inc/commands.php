@@ -26,9 +26,9 @@ function terminal_theme_localize_commands() {
 		return;
 	}
 
-	$show_dates   = get_theme_mod( 'terminal_theme_ls_show_dates', true );
-	$posts_limit  = absint( get_theme_mod( 'terminal_theme_posts_per_page', 10 ) );
-	$boot_lines   = sanitize_textarea_field( get_theme_mod( 'terminal_theme_boot_lines', "initializing...\nsystem ready.\n// navigate via the menu above, or type a command. try: help" ) );
+	$show_dates  = get_theme_mod( 'terminal_theme_ls_show_dates', true );
+	$posts_limit = absint( get_theme_mod( 'terminal_theme_posts_per_page', 10 ) );
+	$boot_lines  = sanitize_textarea_field( get_theme_mod( 'terminal_theme_boot_lines', "initializing...\nsystem ready.\n// navigate via the menu above, or type a command. try: help" ) );
 
 	// ── ls pages/ ─────────────────────────────────────────────────────────
 
@@ -74,8 +74,8 @@ function terminal_theme_localize_commands() {
 
 	// ── ls categories/ ───────────────────────────────────────────────────
 
-	$categories  = get_categories( array( 'hide_empty' => false ) );
-	$cats_out    = array();
+	$categories = get_categories( array( 'hide_empty' => false ) );
+	$cats_out   = array();
 
 	foreach ( $categories as $cat ) {
 		$cats_out[] = array(
@@ -120,15 +120,15 @@ function terminal_theme_localize_commands() {
 		'bootLines'  => array_filter( array_map( 'sanitize_text_field', explode( "\n", $boot_lines ) ) ),
 		'showDates'  => (bool) $show_dates,
 		'i18n'       => array(
-			'help'        => esc_html__( 'available commands:', 'terminal-theme' ),
-			'notFound'    => esc_html__( '// command not found. type help for available commands.', 'terminal-theme' ),
-			'cleared'     => esc_html__( '// terminal cleared.', 'terminal-theme' ),
-			'noPages'     => esc_html__( '// no pages found.', 'terminal-theme' ),
-			'noPosts'     => esc_html__( '// no posts found.', 'terminal-theme' ),
-			'noResults'   => esc_html__( '// no results found.', 'terminal-theme' ),
-			'searching'   => esc_html__( '// searching...', 'terminal-theme' ),
-			'themeSet'    => esc_html__( '// theme updated.', 'terminal-theme' ),
-			'opening'     => esc_html__( '// opening...', 'terminal-theme' ),
+			'help'      => esc_html__( 'available commands:', 'terminal-theme' ),
+			'notFound'  => esc_html__( '// command not found. type help for available commands.', 'terminal-theme' ),
+			'cleared'   => esc_html__( '// terminal cleared.', 'terminal-theme' ),
+			'noPages'   => esc_html__( '// no pages found.', 'terminal-theme' ),
+			'noPosts'   => esc_html__( '// no posts found.', 'terminal-theme' ),
+			'noResults' => esc_html__( '// no results found.', 'terminal-theme' ),
+			'searching' => esc_html__( '// searching...', 'terminal-theme' ),
+			'themeSet'  => esc_html__( '// theme updated.', 'terminal-theme' ),
+			'opening'   => esc_html__( '// opening...', 'terminal-theme' ),
 		),
 	);
 
