@@ -3,3 +3,4 @@ vendor/
 .wp-env/
 *.log
 .DS_Store
+notes/
