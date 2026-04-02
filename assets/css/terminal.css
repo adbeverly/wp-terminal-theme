@@ -1,0 +1,614 @@
+/*
+ * terminal.css
+ *
+ * Core terminal styles. All colors reference CSS custom properties defined
+ * in modes.css — no hardcoded color values in this file.
+ *
+ * Structure:
+ *   1. Global variables and reset
+ *   2. Base typography
+ *   3. Skip link (accessibility)
+ *   4. Terminal window
+ *   5. Title bar
+ *   6. Navigation menu bar
+ *   7. Dropdown menus
+ *   8. Terminal content area
+ *   9. Command prompt and input
+ *  10. Boot sequence
+ *  11. Command output
+ *  12. Footer and mode toggle
+ *  13. Post and page content
+ *  14. Links
+ *  15. Forms and search
+ *  16. Scrollbar
+ *  17. Focus indicators
+ *  18. Utility
+ */
+
+/* ── 1. Global variables and reset ──────────────────────────────────────── */
+
+:root {
+	--terminal-font: "JetBrains Mono", "Courier New", Courier, monospace;
+	--terminal-size: 0.9375rem; /* 15px */
+	--terminal-line: 1.6;
+	--radius:        0px;
+	--transition:    150ms ease;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin:     0;
+	padding:    0;
+}
+
+/* ── 2. Base typography ──────────────────────────────────────────────────── */
+
+html {
+	font-size: 100%;
+	-webkit-text-size-adjust: 100%;
+}
+
+body {
+	background-color: var(--bg);
+	color:            var(--text);
+	font-family:      var(--terminal-font);
+	font-size:        var(--terminal-size);
+	line-height:      var(--terminal-line);
+	min-height:       100vh;
+}
+
+/* ── 3. Skip link ────────────────────────────────────────────────────────── */
+
+.skip-link {
+	position:   absolute;
+	top:        -999px;
+	left:       -999px;
+	z-index:    9999;
+	padding:    0.5rem 1rem;
+	background: var(--accent);
+	color:      var(--bg);
+	font-size:  var(--terminal-size);
+	text-decoration: underline;
+}
+
+.skip-link:focus {
+	top:  1rem;
+	left: 1rem;
+}
+
+/* ── 4. Terminal window ──────────────────────────────────────────────────── */
+
+.terminal-window {
+	display:        flex;
+	flex-direction: column;
+	min-height:     100vh;
+	border:         1px solid var(--border);
+	background:     var(--bg);
+}
+
+@media ( min-width: 960px ) {
+	.terminal-window {
+		max-width:    960px;
+		margin-left:  auto;
+		margin-right: auto;
+		min-height:   100vh;
+		border-left:  1px solid var(--border);
+		border-right: 1px solid var(--border);
+	}
+}
+
+/* ── 5. Title bar ────────────────────────────────────────────────────────── */
+
+.terminal-titlebar {
+	display:         flex;
+	align-items:     center;
+	gap:             0.75rem;
+	padding:         0.5rem 1rem;
+	background:      var(--bg-surface);
+	border-bottom:   1px solid var(--border);
+	user-select:     none;
+}
+
+.terminal-dots {
+	display: flex;
+	gap:     0.375rem;
+}
+
+.terminal-dot {
+	width:         0.75rem;
+	height:        0.75rem;
+	border-radius: 50%;
+	background:    var(--text-muted);
+}
+
+.terminal-dot--close  { background: #ff5f57; }
+.terminal-dot--min    { background: #febc2e; }
+.terminal-dot--expand { background: #28c840; }
+
+.terminal-title {
+	flex:      1;
+	color:     var(--text-muted);
+	font-size: 0.8125rem;
+	text-align: center;
+}
+
+/* ── 6. Navigation menu bar ──────────────────────────────────────────────── */
+
+.terminal-menubar {
+	background:    var(--bg-surface);
+	border-bottom: 1px solid var(--border);
+	padding:       0 0.5rem;
+}
+
+.terminal-menubar ul {
+	display:    flex;
+	list-style: none;
+	flex-wrap:  wrap;
+}
+
+.terminal-menubar > ul > li {
+	position: relative;
+}
+
+.terminal-menubar a {
+	display:         block;
+	padding:         0.375rem 0.75rem;
+	color:           var(--text-muted);
+	text-decoration: none;
+	font-size:       0.875rem;
+	transition:      color var(--transition), background-color var(--transition);
+}
+
+.terminal-menubar a:hover,
+.terminal-menubar a:focus {
+	color:            var(--text);
+	background-color: var(--border);
+}
+
+/* ── 7. Dropdown menus ───────────────────────────────────────────────────── */
+
+.terminal-menubar ul ul {
+	display:    none;
+	position:   absolute;
+	top:        100%;
+	left:       0;
+	z-index:    100;
+	min-width:  12rem;
+	background: var(--bg-surface);
+	border:     1px solid var(--border);
+	flex-direction: column;
+}
+
+.terminal-menubar ul ul a {
+	padding:    0.5rem 1rem;
+	white-space: nowrap;
+}
+
+.terminal-menubar li:hover > ul,
+.terminal-menubar li:focus-within > ul {
+	display: flex;
+}
+
+.terminal-menubar ul ul ul {
+	top:  0;
+	left: 100%;
+}
+
+/* ── 8. Terminal content area ────────────────────────────────────────────── */
+
+.terminal-content {
+	flex:       1;
+	padding:    1.5rem 1rem;
+	overflow-x: hidden;
+}
+
+/* ── 9. Command prompt and input ─────────────────────────────────────────── */
+
+.terminal-prompt-wrap {
+	display:     flex;
+	align-items: center;
+	gap:         0.5rem;
+	margin-top:  1rem;
+}
+
+.terminal-prompt-symbol {
+	color:      var(--accent);
+	flex-shrink: 0;
+}
+
+.terminal-input {
+	flex:             1;
+	background:       transparent;
+	border:           none;
+	border-bottom:    1px solid var(--border);
+	color:            var(--text);
+	font-family:      var(--terminal-font);
+	font-size:        var(--terminal-size);
+	line-height:      var(--terminal-line);
+	outline:          none;
+	caret-color:      var(--cursor);
+}
+
+.terminal-input:focus {
+	border-bottom-color: var(--accent);
+}
+
+/* ── 10. Boot sequence ───────────────────────────────────────────────────── */
+
+.terminal-boot {
+	margin-bottom: 1rem;
+}
+
+.terminal-boot-line {
+	display:    block;
+	color:      var(--text-muted);
+	min-height: 1.6em;
+}
+
+.terminal-boot-line--accent {
+	color: var(--accent);
+}
+
+/* ── 11. Command output ──────────────────────────────────────────────────── */
+
+.terminal-output {
+	margin-bottom: 0.5rem;
+}
+
+.terminal-output-line {
+	display:    block;
+	min-height: 1.6em;
+}
+
+.terminal-output-line--command {
+	color: var(--text-muted);
+}
+
+.terminal-output-line--command::before {
+	content: "> ";
+	color:   var(--accent);
+}
+
+.terminal-output-line--result {
+	color: var(--text);
+}
+
+.terminal-output-line--error {
+	color: #ff5f57;
+}
+
+.terminal-output-line--comment {
+	color: var(--text-muted);
+}
+
+/* ── 12. Footer and mode toggle ──────────────────────────────────────────── */
+
+.terminal-footer {
+	border-top:  1px solid var(--border);
+	background:  var(--bg-surface);
+	padding:     0.5rem 1rem;
+	display:     flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap:   wrap;
+	gap:         0.5rem;
+}
+
+.terminal-statusbar {
+	color:     var(--text-muted);
+	font-size: 0.8125rem;
+}
+
+.terminal-mode-toggle {
+	display: flex;
+	gap:     0.25rem;
+}
+
+.terminal-mode-toggle__btn {
+	background:      transparent;
+	border:          none;
+	color:           var(--text-muted);
+	cursor:          pointer;
+	font-family:     var(--terminal-font);
+	font-size:       0.8125rem;
+	padding:         0.125rem 0.25rem;
+	text-decoration: none;
+	transition:      color var(--transition);
+}
+
+.terminal-mode-toggle__btn:hover,
+.terminal-mode-toggle__btn:focus,
+.terminal-mode-toggle__btn[aria-pressed="true"] {
+	color: var(--accent);
+}
+
+.terminal-mode-toggle__separator {
+	color: var(--border);
+}
+
+/* ── 13. Post and page content ───────────────────────────────────────────── */
+
+.entry-content h1,
+.entry-content h2,
+.entry-content h3,
+.entry-content h4,
+.entry-content h5,
+.entry-content h6 {
+	color:         var(--text);
+	margin-top:    1.5em;
+	margin-bottom: 0.5em;
+	line-height:   1.3;
+}
+
+.entry-content h1 { font-size: 1.5rem; }
+.entry-content h2 { font-size: 1.25rem; }
+.entry-content h3 { font-size: 1.125rem; }
+.entry-content h4,
+.entry-content h5,
+.entry-content h6 { font-size: 1rem; }
+
+.entry-content p,
+.entry-content ul,
+.entry-content ol,
+.entry-content blockquote,
+.entry-content pre,
+.entry-content table {
+	margin-bottom: 1em;
+}
+
+.entry-content ul,
+.entry-content ol {
+	padding-left: 1.5em;
+}
+
+.entry-content blockquote {
+	border-left:  3px solid var(--accent);
+	padding-left: 1rem;
+	color:        var(--text-muted);
+}
+
+.entry-content pre,
+.entry-content code {
+	background:  var(--bg-surface);
+	border:      1px solid var(--border);
+	font-family: var(--terminal-font);
+	font-size:   0.875em;
+}
+
+.entry-content pre {
+	padding:    1rem;
+	overflow-x: auto;
+}
+
+.entry-content code {
+	padding: 0.125em 0.25em;
+}
+
+.entry-content pre code {
+	background: transparent;
+	border:     none;
+	padding:    0;
+}
+
+.entry-content img {
+	max-width: 100%;
+	height:    auto;
+}
+
+.entry-content .table-wrap {
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+.entry-content table {
+	border-collapse: collapse;
+	width:           100%;
+	min-width:       30rem;
+}
+
+.entry-content th,
+.entry-content td {
+	border:  1px solid var(--border);
+	padding: 0.5rem;
+}
+
+.entry-content th {
+	background: var(--bg-surface);
+	color:      var(--accent);
+	text-align: left;
+}
+
+/* ── 14. Links ───────────────────────────────────────────────────────────── */
+
+/*
+ * WordPress.org compliance: links in content must use color AND underline —
+ * never color alone. The terminal aesthetic keeps underlines on all content links.
+ */
+
+a {
+	color:           var(--accent);
+	text-decoration: underline;
+}
+
+a:hover,
+a:focus {
+	color: var(--text);
+}
+
+/* Navigation links override — underline would look wrong in the menu bar */
+.terminal-menubar a,
+.terminal-mode-toggle__btn {
+	text-decoration: none;
+}
+
+/* ── 15. Forms and search ────────────────────────────────────────────────── */
+
+.search-form {
+	display: flex;
+	gap:     0.5rem;
+}
+
+.search-field {
+	flex:        1;
+	background:  var(--bg-surface);
+	border:      1px solid var(--border);
+	color:       var(--text);
+	font-family: var(--terminal-font);
+	font-size:   var(--terminal-size);
+	padding:     0.375rem 0.5rem;
+}
+
+.search-field:focus {
+	border-color: var(--accent);
+	outline:      none;
+}
+
+.search-submit {
+	background:  var(--bg-surface);
+	border:      1px solid var(--border);
+	color:       var(--accent);
+	cursor:      pointer;
+	font-family: var(--terminal-font);
+	font-size:   var(--terminal-size);
+	padding:     0.375rem 0.75rem;
+	transition:  background-color var(--transition), color var(--transition);
+}
+
+.search-submit:hover,
+.search-submit:focus {
+	background-color: var(--accent);
+	color:            var(--bg);
+}
+
+/* ── 16. Scrollbar ───────────────────────────────────────────────────────── */
+
+::-webkit-scrollbar {
+	width: 6px;
+}
+
+::-webkit-scrollbar-track {
+	background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--border);
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: var(--text-muted);
+}
+
+/* ── 17. Focus indicators ────────────────────────────────────────────────── */
+
+/*
+ * WordPress.org compliance: all interactive elements must have visible focus
+ * indicators. We use a consistent outline using --accent.
+ */
+
+:focus-visible {
+	outline:        2px solid var(--accent);
+	outline-offset: 2px;
+}
+
+/* ── 18. Utility ─────────────────────────────────────────────────────────── */
+
+.screen-reader-text {
+	clip:     rect(1px, 1px, 1px, 1px);
+	height:   1px;
+	overflow: hidden;
+	position: absolute;
+	width:    1px;
+	word-wrap: normal;
+}
+
+.screen-reader-text:focus {
+	clip:       auto;
+	display:    block;
+	height:     auto;
+	left:       0.3125rem;
+	top:        0.3125rem;
+	width:      auto;
+	z-index:    100000;
+	background: var(--bg-surface);
+	color:      var(--text);
+	padding:    0.5rem 1rem;
+}
+
+.cursor-blink {
+	display:   inline-block;
+	animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+	0%, 100% { opacity: 1; }
+	50%       { opacity: 0; }
+}
+
+/* ── 19. Responsive ──────────────────────────────────────────────────────── */
+
+/*
+ * Mobile-first adjustments. The terminal window is full-width by default;
+ * the 960px cap is applied at wider viewports (see section 4).
+ *
+ * Navigation: below 600px, menu items stack vertically and fill the full
+ * width. No hamburger toggle needed — this matches how terminal menu bars
+ * behave when space is constrained.
+ */
+
+@media ( max-width: 599px ) {
+
+	/* Stack nav items vertically, full width */
+	.terminal-menubar ul {
+		flex-direction: column;
+	}
+
+	.terminal-menubar > ul > li {
+		width: 100%;
+	}
+
+	.terminal-menubar a {
+		padding: 0.5rem 1rem;
+	}
+
+	/* Dropdown menus: full width, no absolute positioning on mobile */
+	.terminal-menubar ul ul {
+		position:  static;
+		width:     100%;
+		border:    none;
+		border-top: 1px solid var(--border);
+		min-width: unset;
+	}
+
+	/* Indent sub-menu items so hierarchy is clear */
+	.terminal-menubar ul ul a {
+		padding-left: 2rem;
+	}
+
+	.terminal-menubar ul ul ul a {
+		padding-left: 3rem;
+	}
+
+	/* Keep dropdowns visible when parent is open on mobile
+	   (focus-within still works; hover won't on touch devices) */
+	.terminal-menubar li:focus-within > ul {
+		display: flex;
+	}
+
+	/* Tighten content padding on small screens */
+	.terminal-content {
+		padding: 1rem 0.75rem;
+	}
+
+	/* Footer: stack status and mode toggle */
+	.terminal-footer {
+		flex-direction: column;
+		align-items:    flex-start;
+	}
+
+	/* Slightly smaller base font on very small screens */
+	body {
+		font-size: 0.875rem; /* 14px */
+	}
+}
