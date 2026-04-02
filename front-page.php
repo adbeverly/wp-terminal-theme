@@ -32,7 +32,7 @@ get_header();
 			autocorrect="off"
 			autocapitalize="off"
 			spellcheck="false"
-			placeholder="<?php echo esc_attr_x( 'type a command...', 'placeholder', 'terminal-theme' ); ?>"
+			placeholder="<?php echo esc_attr_x( "try 'help' for a list of commands...", 'placeholder', 'terminal-theme' ); ?>"
 			aria-label="<?php esc_attr_e( 'Terminal command input', 'terminal-theme' ); ?>"
 		>
 	</div>

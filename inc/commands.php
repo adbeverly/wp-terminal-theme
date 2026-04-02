@@ -28,7 +28,7 @@ function terminal_theme_localize_commands() {
 
 	$show_dates   = get_theme_mod( 'terminal_theme_ls_show_dates', true );
 	$posts_limit  = absint( get_theme_mod( 'terminal_theme_posts_per_page', 10 ) );
-	$boot_lines   = sanitize_textarea_field( get_theme_mod( 'terminal_theme_boot_lines', "initializing...\nsystem ready." ) );
+	$boot_lines   = sanitize_textarea_field( get_theme_mod( 'terminal_theme_boot_lines', "initializing...\nsystem ready.\n// navigate via the menu above, or type a command. try: help" ) );
 
 	// ── ls pages/ ─────────────────────────────────────────────────────────
 

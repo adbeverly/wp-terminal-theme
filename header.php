@@ -49,13 +49,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<?php /* ── Navigation menu bar ────────────────────────────────────── */ ?>
 	<nav class="terminal-menubar" aria-label="<?php esc_attr_e( 'Primary menu', 'terminal-theme' ); ?>">
+		<ul class="terminal-menubar__home">
+			<li>
+				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="<?php esc_attr_e( 'Home', 'terminal-theme' ); ?>"><?php esc_html_e( '~', 'terminal-theme' ); ?></a>
+			</li>
+		</ul>
 		<?php
 		wp_nav_menu(
 			array(
 				'theme_location' => 'primary',
 				'menu_class'     => 'terminal-menubar__list',
 				'container'      => false,
-				'fallback_cb'    => false,
+				'fallback_cb'    => 'terminal_theme_nav_fallback',
 				'depth'          => 3,
 			)
 		);

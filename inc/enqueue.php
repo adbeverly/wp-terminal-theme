@@ -66,5 +66,14 @@ function terminal_theme_enqueue_assets() {
 		$version,
 		array( 'strategy' => 'defer' )
 	);
+
+	// Navigation dropdown handling — everywhere.
+	wp_enqueue_script(
+		'terminal-theme-navigation',
+		$uri . '/assets/js/navigation.js',
+		array(),
+		$version,
+		array( 'strategy' => 'defer' )
+	);
 }
 add_action( 'wp_enqueue_scripts', 'terminal_theme_enqueue_assets' );

@@ -94,3 +94,58 @@ function terminal_theme_register_sidebars() {
 	);
 }
 add_action( 'widgets_init', 'terminal_theme_register_sidebars' );
+
+/**
+ * Fallback for wp_nav_menu() when no menu is assigned to the primary location.
+ * Builds a hierarchical nested menu from the page tree.
+ */
+function terminal_theme_nav_fallback() {
+	$all_pages = get_pages( array( 'sort_column' => 'menu_order', 'hierarchical' => false, 'number' => 8 ) );
+
+	if ( ! $all_pages ) {
+		return;
+	}
+
+	// Index pages by parent ID so we can build the tree recursively.
+	$by_parent = array();
+	foreach ( $all_pages as $page ) {
+		$by_parent[ $page->post_parent ][] = $page;
+	}
+
+	echo '<ul class="terminal-menubar__list">';
+	terminal_theme_nav_fallback_level( $by_parent, 0 );
+	echo '</ul>';
+}
+
+/**
+ * Recursively output one level of the page tree.
+ *
+ * @param array $by_parent Pages indexed by parent ID.
+ * @param int   $parent_id The parent ID whose children to render.
+ */
+function terminal_theme_nav_fallback_level( $by_parent, $parent_id ) {
+	if ( empty( $by_parent[ $parent_id ] ) ) {
+		return;
+	}
+
+	foreach ( $by_parent[ $parent_id ] as $page ) {
+		$has_children = ! empty( $by_parent[ $page->ID ] );
+		$current      = ( get_queried_object_id() === $page->ID ) ? ' aria-current="page"' : '';
+
+		echo $has_children ? '<li class="has-children">' : '<li>';
+		printf(
+			'<a href="%s"%s>%s</a>',
+			esc_url( get_permalink( $page->ID ) ),
+			$current,
+			esc_html( $page->post_title )
+		);
+
+		if ( $has_children ) {
+			echo '<ul>';
+			terminal_theme_nav_fallback_level( $by_parent, $page->ID );
+			echo '</ul>';
+		}
+
+		echo '</li>';
+	}
+}

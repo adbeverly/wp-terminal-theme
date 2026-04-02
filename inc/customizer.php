@@ -97,7 +97,7 @@ function terminal_theme_customize_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'terminal_theme_boot_lines',
 		array(
-			'default'           => "initializing...\nsystem ready.",
+			'default'           => "initializing...\nsystem ready.\n// navigate via the menu above, or type a command. try: help",
 			'sanitize_callback' => 'sanitize_textarea_field',
 		)
 	);
