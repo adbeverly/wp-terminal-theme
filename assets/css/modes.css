@@ -35,11 +35,11 @@
 /* ── Groovy mode ─────────────────────────────────────────────────────────── */
 
 [data-theme="groovy"] {
-	--bg:         #1a0035;
-	--bg-surface: #2d0057;
-	--text:       #ff6fff;
-	--text-muted: #9933cc;
-	--accent:     #ffcc00;
-	--border:     #4d0099;
-	--cursor:     #ffcc00;
+	--bg:         #051515;
+	--bg-surface: #0a2020;
+	--text:       #00e5cc;
+	--text-muted: #3d7070;
+	--accent:     #ff7700;
+	--border:     #143030;
+	--cursor:     #ff7700;
 }

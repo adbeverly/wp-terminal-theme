@@ -420,7 +420,112 @@ body {
 	text-align: left;
 }
 
-/* ── 14. Links ───────────────────────────────────────────────────────────── */
+/* ── 14. Archive and search post list ───────────────────────────────────── */
+
+.archive-header,
+.archive-description {
+	margin-bottom: 1.5rem;
+}
+
+.archive-title {
+	color:     var(--accent);
+	font-size: 1rem;
+}
+
+.post-list {
+	display:        flex;
+	flex-direction: column;
+	gap:            0.25rem;
+}
+
+.post-list__item {
+	display:     flex;
+	align-items: baseline;
+	gap:         1rem;
+	flex-wrap:   wrap;
+}
+
+.post-list__date {
+	color:      var(--text-muted);
+	font-size:  0.875rem;
+	flex-shrink: 0;
+}
+
+.post-list__title {
+	color:           var(--text);
+	text-decoration: underline;
+}
+
+.post-list__title:hover,
+.post-list__title:focus {
+	color: var(--accent);
+}
+
+.post-list__excerpt {
+	width:     100%;
+	color:     var(--text-muted);
+	font-size: 0.875rem;
+	margin:    0;
+}
+
+/* ── 15. Entry meta (single post) ────────────────────────────────────────── */
+
+.entry-header {
+	margin-bottom: 1.5rem;
+	border-bottom: 1px solid var(--border);
+	padding-bottom: 1rem;
+}
+
+.entry-title {
+	color:     var(--accent);
+	font-size: 1.25rem;
+}
+
+.entry-meta {
+	display:   flex;
+	gap:       1rem;
+	flex-wrap: wrap;
+	color:     var(--text-muted);
+	font-size: 0.875rem;
+	margin-top: 0.5rem;
+}
+
+.entry-footer {
+	display:        flex;
+	flex-direction: column;
+	gap:            0.25rem;
+	margin-top:     1.5rem;
+	padding-top:    1rem;
+	border-top:     1px solid var(--border);
+	color:          var(--text-muted);
+	font-size:      0.875rem;
+}
+
+.post-navigation {
+	margin-top:    2rem;
+	padding-top:   1rem;
+	border-top:    1px solid var(--border);
+	display:       flex;
+	justify-content: space-between;
+	gap:           1rem;
+	flex-wrap:     wrap;
+}
+
+.post-navigation a {
+	color:           var(--text-muted);
+	text-decoration: underline;
+}
+
+.post-navigation a:hover,
+.post-navigation a:focus {
+	color: var(--accent);
+}
+
+.search-term {
+	color: var(--text);
+}
+
+/* ── 16. Links ───────────────────────────────────────────────────────────── */
 
 /*
  * WordPress.org compliance: links in content must use color AND underline —
@@ -443,7 +548,88 @@ a:focus {
 	text-decoration: none;
 }
 
-/* ── 15. Forms and search ────────────────────────────────────────────────── */
+/* ── 17. Comments ────────────────────────────────────────────────────────── */
+
+.comments-area {
+	margin-top:  2rem;
+	padding-top: 1rem;
+	border-top:  1px solid var(--border);
+}
+
+.comments-title {
+	color:         var(--accent);
+	font-size:     1rem;
+	margin-bottom: 1.5rem;
+}
+
+.comment-list,
+.trackbacks-list {
+	list-style: none;
+	padding:    0;
+}
+
+.comment-list .children {
+	list-style: none;
+	padding-left: 2rem;
+	border-left:  1px solid var(--border);
+	margin-top:   0.5rem;
+}
+
+.terminal-comment {
+	margin-bottom: 1.5rem;
+}
+
+.comment-meta {
+	display:   flex;
+	gap:       1rem;
+	flex-wrap: wrap;
+	color:     var(--text-muted);
+	font-size: 0.875rem;
+	margin-bottom: 0.5rem;
+}
+
+.comment-author a,
+.comment-date a {
+	color:           var(--text-muted);
+	text-decoration: underline;
+}
+
+.comment-author a:hover,
+.comment-date a:hover {
+	color: var(--accent);
+}
+
+/* Post author badge — WordPress adds .bypostauthor to the <li> */
+.bypostauthor > article > .comment-meta .comment-author::after {
+	content:      ' // author';
+	color:        var(--accent);
+	font-size:    0.75rem;
+}
+
+.comment-edit a {
+	color:           var(--text-muted);
+	font-size:       0.75rem;
+	text-decoration: underline;
+}
+
+.comment-reply a {
+	color:           var(--text-muted);
+	font-size:       0.875rem;
+	text-decoration: underline;
+}
+
+.comment-reply a:hover,
+.comment-reply a:focus {
+	color: var(--accent);
+}
+
+.trackbacks-title {
+	color:         var(--text-muted);
+	font-size:     0.875rem;
+	margin-bottom: 0.5rem;
+}
+
+/* ── 18. Forms and search ────────────────────────────────────────────────── */
 
 .search-form {
 	display: flex;
@@ -482,7 +668,7 @@ a:focus {
 	color:            var(--bg);
 }
 
-/* ── 16. Scrollbar ───────────────────────────────────────────────────────── */
+/* ── 18. Scrollbar ───────────────────────────────────────────────────────── */
 
 ::-webkit-scrollbar {
 	width: 6px;
@@ -500,7 +686,7 @@ a:focus {
 	background: var(--text-muted);
 }
 
-/* ── 17. Focus indicators ────────────────────────────────────────────────── */
+/* ── 19. Focus indicators ────────────────────────────────────────────────── */
 
 /*
  * WordPress.org compliance: all interactive elements must have visible focus
@@ -512,7 +698,7 @@ a:focus {
 	outline-offset: 2px;
 }
 
-/* ── 18. Utility ─────────────────────────────────────────────────────────── */
+/* ── 20. Utility ─────────────────────────────────────────────────────────── */
 
 .screen-reader-text {
 	clip:     rect(1px, 1px, 1px, 1px);
@@ -546,7 +732,7 @@ a:focus {
 	50%       { opacity: 0; }
 }
 
-/* ── 19. Responsive ──────────────────────────────────────────────────────── */
+/* ── 21. Responsive ──────────────────────────────────────────────────────── */
 
 /*
  * Mobile-first adjustments. The terminal window is full-width by default;
