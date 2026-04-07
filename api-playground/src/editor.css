@@ -1,0 +1,92 @@
+/**
+ * API Playground Block — Editor-Only Styles
+ *
+ * Loaded only inside the Gutenberg block editor.
+ * Compiled by @wordpress/scripts: imported in src/index.js → build/index.css
+ *
+ * Styles here adjust the editor preview (.apb-preview) to look accurate
+ * while the site owner is building the page. They also add the editor-only
+ * "Chat is active on the published page" notice.
+ *
+ * The CSS variables defined in style.css ( --apb-bg, --apb-text, etc.) are
+ * available here too because style.css is also loaded in the editor.
+ */
+
+/* -----------------------------------------------------------------------------
+ * Editor preview wrapper
+ *
+ * In the editor, the block renders .apb-preview (from edit.js).
+ * On the frontend, it renders .apb-chat (from chat.js).
+ * They share the title bar and chip styles from style.css.
+ * -------------------------------------------------------------------------- */
+
+.apb-preview {
+	background-color: var( --apb-bg, #0d0d0d );
+	border: 1px solid var( --apb-border, #2a2a2a );
+	color: var( --apb-text, #00ff00 );
+	font-family: var( --apb-font, "JetBrains Mono", monospace );
+	font-size: 0.875rem;
+	line-height: 1.6;
+}
+
+.apb-body {
+	padding: 1rem 0.875rem;
+}
+
+/* -----------------------------------------------------------------------------
+ * Greeting preview
+ * -------------------------------------------------------------------------- */
+
+.apb-greeting {
+	color: var( --apb-text, #00ff00 );
+	margin: 0 0 0.875rem;
+}
+
+.apb-greeting::before {
+	color: var( --apb-muted, #4a4a4a );
+	content: "// ";
+}
+
+/* -----------------------------------------------------------------------------
+ * Chips in the editor preview (same classes as frontend, but disabled).
+ * The main chip styles come from style.css.
+ * -------------------------------------------------------------------------- */
+
+.apb-body .apb-chips {
+	margin: 0 0 0.875rem;
+	padding: 0;
+}
+
+/* -----------------------------------------------------------------------------
+ * Input row preview
+ * -------------------------------------------------------------------------- */
+
+.apb-input-row {
+	align-items: center;
+	border-top: 1px solid var( --apb-border, #2a2a2a );
+	display: flex;
+	gap: 0.5rem;
+	padding-top: 0.625rem;
+}
+
+.apb-input-placeholder {
+	color: var( --apb-muted, #4a4a4a );
+	flex: 1;
+	font-family: var( --apb-font, "JetBrains Mono", monospace );
+	font-size: 0.875rem;
+}
+
+/* -----------------------------------------------------------------------------
+ * Editor-only notice
+ *
+ * Tells the site owner the chat only works on the published frontend,
+ * not inside the editor canvas.
+ * -------------------------------------------------------------------------- */
+
+.apb-editor-notice {
+	border-top: 1px solid var( --apb-border, #2a2a2a );
+	color: var( --apb-muted, #4a4a4a );
+	font-size: 0.75rem;
+	margin: 0.875rem 0 0;
+	padding-top: 0.625rem;
+}

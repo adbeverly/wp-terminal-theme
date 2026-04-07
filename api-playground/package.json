@@ -1,0 +1,14 @@
+{
+  "name": "api-playground",
+  "version": "1.0.0",
+  "description": "Configurable AI chat block powered by the Anthropic API.",
+  "scripts": {
+    "build": "wp-scripts build src/index.js src/chat.js",
+    "start": "wp-scripts start src/index.js src/chat.js",
+    "lint:js": "wp-scripts lint-js src/",
+    "lint:css": "wp-scripts lint-style src/"
+  },
+  "devDependencies": {
+    "@wordpress/scripts": "^30.0.0"
+  }
+}

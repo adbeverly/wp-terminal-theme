@@ -1,0 +1,58 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "api-playground/chat",
+	"version": "1.0.0",
+	"title": "API Playground",
+	"category": "widgets",
+	"icon": "format-chat",
+	"description": "Embed a configurable AI chat interface powered by the Anthropic API.",
+	"keywords": [ "chat", "ai", "claude", "anthropic", "terminal" ],
+	"textdomain": "api-playground",
+	"attributes": {
+		"systemPrompt": {
+			"type": "string",
+			"default": ""
+		},
+		"greeting": {
+			"type": "string",
+			"default": "// glad you're here. ask me anything."
+		},
+		"starterPrompts": {
+			"type": "array",
+			"default": [],
+			"items": {
+				"type": "string"
+			}
+		},
+		"placeholder": {
+			"type": "string",
+			"default": "> type a command..."
+		},
+		"maxTokens": {
+			"type": "number",
+			"default": 300
+		},
+		"temperature": {
+			"type": "number",
+			"default": 0.7
+		},
+		"showPoweredBy": {
+			"type": "boolean",
+			"default": true
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": [ "wide", "full" ],
+		"color": false,
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
+	},
+	"editorScript": "file:./build/index.js",
+	"editorStyle": "file:./build/index.css",
+	"style": "file:./build/style-index.css",
+	"viewScript": "file:./build/chat.js"
+}
